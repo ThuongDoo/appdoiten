@@ -1,0 +1,13 @@
+{
+  "name": "appdoiten-neutralino",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bản nhẹ (Neutralinojs) của App đổi tên file cho Bé",
+  "scripts": {
+    "start": "node build.js && neu run",
+    "dist": "node build.js && neu build --release --embed-resources"
+  },
+  "devDependencies": {
+    "@neutralinojs/neu": "^11.7.2"
+  }
+}

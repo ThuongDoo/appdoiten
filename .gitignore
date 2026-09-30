@@ -1,0 +1,23 @@
+# Developer tools' files
+.lite_workspace.lua
+
+# Neutralinojs binaries and builds
+/bin
+/dist
+
+# Neutralinojs client (minified)
+neutralino.js
+
+# Neutralinojs related files
+.storage
+*.log
+# File sinh ra khi build (chép từ ../renderer và src/)
+/resources/index.html
+/resources/app.js
+/resources/style.css
+/resources/api.js
+
+
+node_modules/
+.env
+npm-debug.log*

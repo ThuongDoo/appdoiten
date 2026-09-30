@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' ws://127.0.0.1:* ws://localhost:*"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <h1>App đổi tên cho Bé</h1>
+      <div class="spacer"></div>
+      <button id="btnPick" class="primary">+ Chọn file</button>
+      <button id="btnSort" title="Sắp xếp theo ngày sửa đổi của file">
+        Sắp xếp: cũ → mới
+      </button>
+      <button id="btnRemove">Bỏ file đã chọn</button>
+    </header>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div class="spacer"></div>
+        <label class="check"
+          ><input type="checkbox" id="keepExt" checked /> Giữ nguyên phần mở
+          rộng (.jpg, .pdf…)</label
+        >
+        <button id="btnConfirm" class="primary" title="Tạo tên nháp (tính từ tên gốc) cho các file đang tích chọn">
+          Xác nhận
+        </button>
+      </div>
+
+      <!-- Thứ tự các ô = thứ tự thực hiện khi bấm Xác nhận -->
+      <div class="ops">
+        <div class="op">
+          <label for="delStart">Xóa ký tự</label>
+          <div class="row">
+            <span class="muted small">đầu</span>
+            <input id="delStart" type="number" min="0" placeholder="0" class="num" />
+            <span class="muted small">cuối</span>
+            <input id="delEnd" type="number" min="0" placeholder="0" class="num" />
+          </div>
+        </div>
+
+        <div class="op">
+          <label for="find">Tìm và thay thế</label>
+          <div class="row">
+            <input id="find" placeholder="Tìm" />
+            <input id="replace" placeholder="Thay bằng" />
+          </div>
+        </div>
+
+        <div class="op">
+          <label for="prefix">Thêm vào đầu</label>
+          <div class="row">
+            <input id="prefix" placeholder="vd: 2026_" />
+          </div>
+        </div>
+
+        <div class="op">
+          <label for="suffix">Thêm vào cuối</label>
+          <div class="row">
+            <input id="suffix" placeholder="vd: _final" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnResetNames">Khôi phục</button>
+      </div>
+    </section>
+
+    <main id="dropZone" class="list">
+      <table>
+        <thead>
+          <tr>
+            <th class="c-check">
+              <input type="checkbox" id="checkAll" title="Chọn tất cả" />
+            </th>
+            <th class="c-idx">#</th>
+            <th class="c-time">Ngày sửa đổi</th>
+            <th>Tên hiện tại</th>
+            <th>Tên mới (nháp)</th>
+            <th class="c-status">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty">
+        <p>Chưa có file nào.</p>
+        <p class="muted">Bấm <b>+ Chọn file</b>.</p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <span id="summary" class="muted"></span>
+      <div class="spacer"></div>
+      <button id="btnUndo" disabled>Hoàn tác lần đổi tên trước</button>
+      <button id="btnApply" class="primary" disabled>Lưu</button>
+    </footer>
+
+    <dialog id="confirmDlg" class="dlg">
+      <form method="dialog">
+        <h2 id="confirmTitle"></h2>
+        <ul id="confirmList" class="dlg-list"></ul>
+        <p id="confirmMore" class="muted small"></p>
+        <div class="dlg-actions">
+          <button value="cancel">Hủy</button>
+          <button value="ok" class="primary" autofocus>Đồng ý</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script src="js/neutralino.js"></script>
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
